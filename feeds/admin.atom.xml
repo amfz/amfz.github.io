@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>am - Admin</title><link href="http://amfz.github.io/" rel="alternate"></link><link href="http://amfz.github.io/feeds/admin.atom.xml" rel="self"></link><id>http://amfz.github.io/</id><updated>2017-04-04T21:10:00+01:00</updated><entry><title>First Post</title><link href="http://amfz.github.io/first-post.html" rel="alternate"></link><published>2017-04-04T21:10:00+01:00</published><updated>2017-04-04T21:10:00+01:00</updated><author><name>AM</name></author><id>tag:amfz.github.io,2017-04-04:/first-post.html</id><summary type="html">&lt;p&gt;This is my first Pelican post.&lt;/p&gt;
+&lt;p&gt;Tutorials/documentation used
+  * &lt;a href="http://docs.getpelican.com/en/3.6.3/quickstart.html"&gt;Pelican quickstart&lt;/a&gt;
+  * &lt;a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/"&gt;Make a Github Pages blog with Pelican, &lt;em&gt;Fedora Magazine&lt;/em&gt;&lt;/a&gt;
+  * &lt;a href="https://pedrorodriguez.io/blog/2015/09/15/github-website-with-pelican/"&gt;Creating a Github Pages Website with Pelican, Pedro Rodriguez&lt;/a&gt;
+  * &lt;a href="https://gist.github.com/josefjezek/6053301"&gt;How to use Pelican on github pages, Josef Jezek&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Misc notes on installation:
+&lt;em&gt; created an environment with &lt;a href="https://conda.io/docs/using/envs.html"&gt;conda&lt;/a&gt; rather than virtualenv …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is my first Pelican post.&lt;/p&gt;
+&lt;p&gt;Tutorials/documentation used
+  * &lt;a href="http://docs.getpelican.com/en/3.6.3/quickstart.html"&gt;Pelican quickstart&lt;/a&gt;
+  * &lt;a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/"&gt;Make a Github Pages blog with Pelican, &lt;em&gt;Fedora Magazine&lt;/em&gt;&lt;/a&gt;
+  * &lt;a href="https://pedrorodriguez.io/blog/2015/09/15/github-website-with-pelican/"&gt;Creating a Github Pages Website with Pelican, Pedro Rodriguez&lt;/a&gt;
+  * &lt;a href="https://gist.github.com/josefjezek/6053301"&gt;How to use Pelican on github pages, Josef Jezek&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Misc notes on installation:
+&lt;em&gt; created an environment with &lt;a href="https://conda.io/docs/using/envs.html"&gt;conda&lt;/a&gt; rather than virtualenv
+&lt;/em&gt; &lt;code&gt;activate&lt;/code&gt; works in cmd.exe, but not Powershell&lt;/p&gt;
+&lt;p&gt;quickstart options used:
+&lt;em&gt; Where do you want to create your new web site? [.]
+&lt;/em&gt; What will be the title of this web site? am
+&lt;em&gt; Who will be the author of this web site? AM
+&lt;/em&gt; What will be the default language of this web site? [English]
+&lt;em&gt; Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) y
+&lt;/em&gt; What is your URL prefix? (see above example; no trailing slash) http://amfz.github.io
+&lt;em&gt; Do you want to enable article pagination? (Y/n) y
+&lt;/em&gt; How many articles per page do you want? [10]
+&lt;em&gt; What is your time zone? [Europe/Paris] America/New_York
+&lt;/em&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n) y
+&lt;em&gt; Do you want an auto-reload &amp;amp; simpleHTTP script to assist with theme and site development? (Y/n) y
+&lt;/em&gt; Do you want to upload your website using FTP? (y/N) n
+&lt;em&gt; Do you want to upload your website using SSH? (y/N) n
+&lt;/em&gt; Do you want to upload your website using Dropbox? (y/N) n
+&lt;em&gt; Do you want to upload your website using S3? (y/N) n
+&lt;/em&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N) n
+&lt;em&gt; Do you want to upload your website using GitHub Pages? (y/N) y
+&lt;/em&gt; Is this your personal page (username.github.io)? (y/N) y&lt;/p&gt;</content></entry></feed>
