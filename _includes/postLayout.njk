@@ -1,0 +1,18 @@
+{% extends "baseLayout.njk" %}
+
+    {% block main %}
+        <article class="post">
+            {% if blurb %}
+                {% if title %}
+                    <h1 class="subtitled">{{title}}</h1>
+                {% endif %}
+                <p class="blurb">{{blurb}}
+            {% else %}
+                {% if title %}
+                    <h1>{{title}}</h1>
+                {% endif %}
+            {% endif %}
+
+            {{content | safe}}
+        </article>
+    {% endblock %}

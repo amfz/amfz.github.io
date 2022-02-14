@@ -1,0 +1,259 @@
+/* Core layout */
+:root {
+    --gray: #999;
+    --darkgray: #333;
+    --white: #fff;
+    --link-blue:#0000EE;
+    --fonts-serif: Georgia, Times, serif;;
+    --fonts-sans-serif: 'Public Sans', sans-serif;
+    --max-width: 800px;
+    --bg-color: #ffffff;
+    background-color: var(--bg-color);
+    font-size: clamp(1.1rem, calc(1.1rem + ((1vw - 0.1875rem) * 0.64)), 1.3rem);
+    min-height: 0vw;
+  }
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: var(--darkgray);
+  font-family: var(--fonts-serif);
+  overflow-wrap:anywhere;
+}
+
+#site {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(1, [col-start] 1fr);
+  gap: 20px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'header' 'main' 'footer';
+  max-width: var(--max-width);
+}
+
+#site > header {
+  grid-area: header;
+  grid-column: col-start / span 1;
+  background-color: var(--bg-color);
+  padding: 0 1em;
+}
+
+#site > main {
+  grid-area: main;
+  grid-column: col-start / span 1;
+  min-width: 0;
+  overflow: auto;
+}
+
+#site > footer {
+  grid-area: footer;
+  grid-column: col-start / span 1;
+  min-width: 0;
+  padding: 3rem 1rem 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--fonts-sans-serif);
+  font-size: .75rem;
+}
+
+article, div, section {
+  margin: 0;
+  padding: 0;
+}
+
+.post {
+  /* padding mainly for mobile 
+     not in main in case I ever want full-width content */
+  padding: 0 1em;
+}
+
+/* LAYOUT MEDIA QUERIES */
+@media (min-width: 500px){
+  #site > main {
+    grid-row: 2;
+  }
+
+  .content {
+    grid-column: col-start 2 / span 3;
+  }
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fonts-sans-serif);
+  min-height: 0vw;
+}
+
+h1 {
+  /* font-size: 3.2rem; */
+  font-size: clamp(2.5rem, calc(2.5rem + ((1vw - 0.1875rem) * 2.24)), 3.2rem);
+  font-weight: 300;
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  /* font-size: 2.44rem; */
+  font-size: clamp(2.07rem, calc(2.07rem + ((1vw - 0.1875rem) * 1.184)), 2.44rem);
+  font-weight: 300;
+  letter-spacing: -.5px;
+}
+
+h3 {
+  /* font-size: 1.95rem; */
+  font-size: clamp(1.73rem, calc(1.73rem + ((1vw - 0.1875rem) * 0.704)), 1.95rem);
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+h4 {
+  /* font-size: 1.56rem; */
+  font-size: clamp(1.44rem, calc(1.44rem + ((1vw - 0.1875rem) * 0.384)), 1.56rem);
+  font-weight: 400;
+  letter-spacing: .25px;
+}
+
+h5 {
+  /* font-size: 1.25rem; */
+  font-size: clamp(1.2rem, calc(1.2rem + ((1vw - 0.1875rem) * 0.16)), 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .15px;
+}
+
+p, ul, li {
+  line-height: 1.75em;
+}
+
+p {
+  padding: 0;
+}
+
+a:link, a:visited {
+  color: var(--link-blue);
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  text-decoration: underline .1em;
+  text-decoration-skip-ink: none;
+}
+
+:focus {
+  outline: 1px solid;
+  background-color: rgba(255, 255, 0, 0.7);
+}
+
+::selection {
+  background-color: rgba(255, 255, 0, 0.7);
+}
+
+.sans-serif {
+  font-family: var(--fonts-sans-serif);
+}
+
+.text-muted {
+  color:var(--darkgray);
+  font-size: .85em;
+}
+
+.no-bullets {
+  list-style-type: none;
+}
+
+h2.compact {
+  font-size: clamp(1.73rem, calc(1.73rem + ((1vw - 0.1875rem) * 0.704)), 1.95rem);
+}
+
+.compact {
+  line-height: 1.4em;
+}
+
+.post-preview > p {
+  margin: .1rem 0 0 0;
+}
+
+/* Handle subtitles and blurbs */
+.blurb {
+  font-family: var(--fonts-sans-serif);
+  font-size: .85em;
+}
+
+.subtitled {
+  margin-bottom: 0;
+}
+
+
+/* NAVIGATION */
+nav {
+  z-index: 9999;
+  font-family: var(--fonts-sans-serif);
+  padding: .75em 0;
+}
+
+nav ul {
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--max-width);
+}
+
+nav li:nth-child(n+1) {
+  padding: 0 2.5vw;
+}
+
+nav li:first-child {
+  margin-right: auto;
+  padding: 0 2.5vw 0 0;
+}
+
+nav li:last-child {
+  padding: 0 0 0 2.5vw;
+}
+
+nav [aria-current="page"] {
+  text-decoration: underline .6em rgba(255, 255, 0, 0.7);
+  text-underline-offset: -.3em;
+  text-decoration-skip-ink: none;
+}
+
+nav [aria-current="page"] > a:hover {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-decoration: revert;
+  text-decoration-skip-ink: none;
+}
+
+.nav-item {
+  list-style-type: none;
+}
+
+
+/* IMAGES */
+img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.fill {
+  object-fit: fill;
+}
+
+.fade {
+  opacity: .3;
+}
