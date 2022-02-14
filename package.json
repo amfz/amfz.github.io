@@ -1,0 +1,31 @@
+{
+  "name": "amfz.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amfz/amfz.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amfz/amfz.github.io/issues"
+  },
+  "homepage": "https://github.com/amfz/amfz.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-img": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "markdown-it-attrs": "^4.1.3"
+  }
+}
