@@ -82,3 +82,4 @@ Stuff I found especially useful in getting this off the ground.
 - **[MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web)**: CSS, HTML, and JS reference
 - **[Fluid-responsive font size calculator](https://websemantics.uk/tools/responsive-font-calculator/)**: Generates CSS styles for font sizes that scale to screen size without using `@media` queries
 - **[Type Scale](https://type-scale.com/)**: For setting `h*` font size value ranges. Headers use a minor third scale for smaller screens and a major third scale for bigger screens.
+- **[How to Deploy an Eleventy Site to GitHub](https://www.justus.ws/tech/deploying-eleventy-to-github-pages/)** and **[GitHub Pages Action](https://github.com/marketplace/actions/github-pages-action)**: to get this site online.
