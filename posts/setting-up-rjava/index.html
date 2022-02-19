@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+        <!-- styles -->
+        <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-coy.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Setting up rJava properly - amfz</title>
+</head>
+<body> 
+    <div id="site">
+        <header>
+            <nav>
+                <ul role="list">
+                    <li class="nav-item"><a  href="/">home</a></li>
+                    <li class="nav-item"><a  href="/projects/">projects</a></li>
+                    <li class="nav-item"><a aria-current="page" href="/posts/">blog</a></li>
+                    <li class="nav-item"><a  href="/about/">about</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            
+        <article class="post">
+            
+                
+                    <h1>Setting up rJava properly</h1>
+                
+            
+
+            <p>Back to working with RStudio Server on an EC2 instance. This instance is running on Ubuntu 18.04, installed from <a href="https://www.louisaslett.com/RStudio_AMI/">Louis Aslett's RStudio AMIs</a>. The AMIs come with the Java 8 Runtime Environment, which I assumed meant that I could install and  Java-dependent R packages out of the box.</p>
+<p>That turned out not to be the case, and I hit a snag trying to install <code class="language-r">tabulizer</code>:</p>
+<pre class="language-r"><code class="language-r">ERROR<span class="token operator">:</span> dependency ‘rJava’ is not available <span class="token keyword">for</span> package ‘tabulizerjars’</code></pre>
+<p>Then, trying to install <code class="language-r">rJava</code> nets this error:</p>
+<pre class="language-r"><code class="language-r">configure<span class="token operator">:</span> error<span class="token operator">:</span> One or more Java configuration variables are not set.<br>Make sure R is configured with full Java support <span class="token punctuation">(</span>including JDK<span class="token punctuation">)</span>. Run<br>R CMD javareconf<br>as root to add Java support to R.</code></pre>
+<p>Following the error message, I switched to the terminal. ran <code class="language-bash">sudo R CMD javareconf</code>, and hit another error:</p>
+<pre class="language-bash"><code class="language-bash">conftest.c:1:10: fatal error: jni.h: No such <span class="token function">file</span> or directory </code></pre>
+<p>Googling around, I found <a href="https://shahronak47.wordpress.com/2016/12/29/install-rjava-package-in-r/">Ronak Shah's blog post</a> describing his journey getting rJava installed. I knew Java was included on the AMI, but figured I may as well see what happens installing it over, so I ran the following commands in the terminal.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update<br><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> default-jre<br><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> default-jdk</code></pre>
+<p><code class="language-bash">sudo apt-get update</code> did update some things. Nothing changed after running <code class="language-bash">sudo apt-get install default-jre</code>, as the Java Runtime Environment bundled in the AMI was already the newest version. Four new packages for the Java Development Kit were installed when I ran <code class="language-bash">sudo apt-get install default-jdk</code>, including default-jdk itself, suggesting the problem was that I didn't have the Java Development Kit installed.</p>
+<p>After that, I ran <code class="language-bash">sudo R CMD javareconf</code> again, successfully updating the instance's Java configuration this time.</p>
+<p>With that done, I was able to go back to the R console to install <code class="language-r">tabulizer</code>.</p>
+
+        </article>
+    
+        </main>
+
+        <footer>
+            <!-- <span class="credit">amfz</span> -->
+            <!-- <a href="#site">^top</a> -->
+        </footer>
+    </div>
+</body>
+</html>

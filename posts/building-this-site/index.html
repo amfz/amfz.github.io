@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+        <!-- styles -->
+        <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-coy.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Building This Site - amfz</title>
+</head>
+<body> 
+    <div id="site">
+        <header>
+            <nav>
+                <ul role="list">
+                    <li class="nav-item"><a  href="/">home</a></li>
+                    <li class="nav-item"><a  href="/projects/">projects</a></li>
+                    <li class="nav-item"><a aria-current="page" href="/posts/">blog</a></li>
+                    <li class="nav-item"><a  href="/about/">about</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            
+        <article class="post">
+            
+                
+                    <h1>Building This Site</h1>
+                
+            
+
+            <p>When it comes to web development, I am old and Out of Touch<sup>TM</sup>. The last time I came anywhere close to coding a site myself, Xanga was still a thing. Declaring &quot;best viewed on [browser]&quot; was still a thing. HTML5 was newly a thing (RIP <code>&lt;marquee&gt;</code>). Mobile-first was not a thing.</p>
+<p>I dabbled in making websites since then -- tutorials on Bootstrap and responsive web design; full-screen leaflet.js maps; short-lived experiments with Pelican, R Blogdown, and GitHub Pages default Jekyll themes -- but nothing stuck. And I never got a sense of how it all fit together.</p>
+<p>Suffice it to say, making this site was a Rip Van Winkle experience.</p>
+<p>I can imagine what an 18th century farmer would feel seeing today's technology because I have tried to read about Making A Website From Scratch In 2022. There is so much more than I remember in terms of tooling, and so many new-to-me conveniences (CSS variables!).</p>
+<p>What I wanted was a basic site that was:</p>
+<ol>
+<li>legible on big and small screens,</li>
+<li>built with parts I could explain, and</li>
+<li>made with minimal fussing over tooling.</li>
+</ol>
+<p>What happened is I spent a ton of time anyway learning about a bunch of tools I did not need and looking up n00b questions like &quot;em vs rem&quot;, but that's okay. I have a site I understand now. And I know the difference between <code>em </code>and <code>rem</code>.</p>
+<p>What follows are some notes from building this site from an empty folder.</p>
+<h2>What Are All These Things?</h2>
+<h3>Tool Types</h3>
+<ul>
+<li><strong>Static site generator</strong>: Software that creates a websites based on data (e.g., Markdown files, API responses) and templates. The &quot;static&quot; part comes from the fact that the site does not change based on visitors' actions or changing data.</li>
+<li><strong>Templating engine</strong>: A library that lets you write reusable templates, which comes in very handy for creating webpages that have a standard format. Use the templating engine's specified syntax to indicate what data (which can be stored in variables, markdown files, jsons, etc., or fetched from APIs) should go where.</li>
+</ul>
+<h3>Individual Tools</h3>
+<ul>
+<li><strong>Emmet</strong>: A plugin that makes writing HTML and CSS more convenient, with features like abbreviations/shorthand for creating skeleton HTML, individual elements, and even Lorem Ipsum text. Built into VSCode <a href="https://code.visualstudio.com/docs/editor/emmet">by default</a>.</li>
+<li><strong>Eleventy</strong>: A static site generator written in JavaScript. There are static site generators in lots of other languages, like Jekyll in Ruby and Hugo in Go, but I liked the idea of sticking to just HTML, CSS, and JS for the site.</li>
+<li><strong>Nunjucks</strong>: A templating engine for JavaScript. Lets us define page structures with HTML, then plonk in data. It's essentially a port of Python's <code>jinja2</code>, which is also nice.</li>
+<li><strong>npm</strong>: Stands for node package manager. A JavaScript package manager, analagous to Python's pip. How we add Eleventy and any other libraries or frameworks to the project.</li>
+<li><strong>Node.js</strong>: A JavaScript runtime environment, which just means that it's an application that gives JavaScript code somewhere to run besides in the browser, i.e., it makes it possible to run JS code on your own computer or on a server. It's also a prerequisite for installing npm.</li>
+<li><strong>Bootstrap</strong>: A front-end framework for building responsive sites. Probably best known for its grid system, which pre-dates CSS grid. While I started out with Bootstrap, I eventually decided to write my own stylesheet from scratch to get more CSS practice.</li>
+</ul>
+<h2>How Do These Things Fit Together?</h2>
+<h3>Directory Structure</h3>
+<p>The most barebones site would consist of <code>package.json</code>, <code>index.md</code>, and the rendered HTML in the <code>/_site</code> directory.</p>
+<ul>
+<li><strong><code>/</code>:</strong> The root directory, where the whole project lives.
+<ul>
+<li><strong><code>/_includes</code>:</strong> Folder where page templates live.
+<ul>
+<li><strong><code>layout.njk</code>:</strong> A basic layout template using Nunjucks. It looks like HTML but with more curly braces.</li>
+</ul>
+</li>
+<li><strong><code>/css</code></strong>: Folder I put custom CSS in. Note that if you install a framework like Bootstrap, that CSS is in <code>/node_modules</code>; you'd have to tell Eleventy to include file in the project configuration file, <code>.eleventy.js</code>.</li>
+<li><strong><code>/posts</code></strong> and <strong><code>/projects</code></strong>: Folders where I keep blog posts and project posts, respectively. Eleventy has <a href="https://www.11ty.dev/docs/permalinks/">permalinking</a> and a <a href="https://www.11ty.dev/docs/collections/">system of tags and collections</a> to organize content, but it's still convenient to group similar posts in a folder.
+<ul>
+<li><strong><code>posts.11tydata.js</code></strong> and <strong><code>projects.11tydata.js</code></strong>: Directory data files to do things like apply the same layout and tags to all pages in the directory.</li>
+</ul>
+</li>
+<li><strong><code>/node_modules</code></strong>: Folder where, sensibly, libraries and packages downloaded for this project via npm can be found. Eleventy.js itself can be found here, for example. I didn't mess with this folder manually.</li>
+<li><strong><code>/_site</code></strong>: Folder that Eleventy automatically creates and populates with the rendered static site. I did't really touch this folder, either.</li>
+<li><strong><code>index.md</code></strong>: The homepage content -- just in markdown. The templating engine slots the text here into the appropriate template in <code>/includes</code>. Which template to use can be specified in the markdown file's front matter, which is what I did, or in an <code>11tydata.js</code> file.</li>
+<li><strong><code>.eleventy.js</code></strong>: The configuration file. This is where you tell Eleventy things like what templating engine to use and whether to copy certain files, like images or Bootstrap's CSS file, to the <code>/_site</code> folder without any additional processing.</li>
+<li><strong><code>package.json</code></strong> and <strong><code>package-lock.json</code></strong>: Node project files that store metadata, configuration details, and dependencies for a project.</li>
+</ul>
+</li>
+</ul>
+<h2>Things That Tripped Me Up</h2>
+<ul>
+<li><strong>Adding <code>bootstrap.css</code> and <code>bootstrap.bundle.js</code> to the site</strong>: Files in <code>node_modules</code> are not copied to <code>_site</code> by default -- I had to add the following to <code>.eleventy.js</code>:</li>
+</ul>
+<pre class="language-javascript"><code class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span><br>  <span class="token string-property property">"node_modules/bootstrap/dist/css/bootstrap.min.css"</span><span class="token operator">:</span> <span class="token string">"css/bootstrap.min.css"</span><span class="token punctuation">,</span>  <br>  <span class="token string-property property">"node_modules/bootstrap/dist/css/bootstrap.min.css.map"</span><span class="token operator">:</span> <span class="token string">"css/bootstrap.min.css.map"</span><span class="token punctuation">,</span>  <br>  <span class="token string-property property">"node_modules/bootstrap/dist/js/bootstrap.bundle.js"</span><span class="token operator">:</span> <span class="token string">"js/bootstrap.bundle.js"</span><br> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ul>
+<li><strong>Code block overflows</strong>: The code block above would overflow the underlying grid no matter what CSS styles I tried with the <code>code</code> and <code>pre</code> selectors. It turned out the solution was to modify the main style to have min-width and overflow values:</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector">main</span> <span class="token punctuation">{</span><br>  <span class="token property">min-width</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><br>  <span class="token property">overflow</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
+<h2>Resources</h2>
+<p>Stuff I found especially useful in getting this off the ground.</p>
+<ul>
+<li><strong><a href="https://www.youtube.com/watch?v=j8mJrhhdHWc">Let's learn Eleventy! (with Zach Leatherman) — Learn With Jason</a></strong>: Code-along that starts from an empty folder</li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web">MDN Web Docs</a></strong>: CSS, HTML, and JS reference</li>
+<li><strong><a href="https://websemantics.uk/tools/responsive-font-calculator/">Fluid-responsive font size calculator</a></strong>: Generates CSS styles for font sizes that scale to screen size without using <code>@media</code> queries</li>
+<li><strong><a href="https://type-scale.com/">Type Scale</a></strong>: For setting <code>h*</code> font size value ranges. Headers use a minor third scale for smaller screens and a major third scale for bigger screens.</li>
+<li><strong><a href="https://www.justus.ws/tech/deploying-eleventy-to-github-pages/">How to Deploy an Eleventy Site to GitHub</a></strong> and <strong><a href="https://github.com/marketplace/actions/github-pages-action">GitHub Pages Action</a></strong>: to get this site online.</li>
+</ul>
+
+        </article>
+    
+        </main>
+
+        <footer>
+            <!-- <span class="credit">amfz</span> -->
+            <!-- <a href="#site">^top</a> -->
+        </footer>
+    </div>
+</body>
+</html>

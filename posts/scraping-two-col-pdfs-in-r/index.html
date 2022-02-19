@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+        <!-- styles -->
+        <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-coy.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Scraping two-column PDFs in R - amfz</title>
+</head>
+<body> 
+    <div id="site">
+        <header>
+            <nav>
+                <ul role="list">
+                    <li class="nav-item"><a  href="/">home</a></li>
+                    <li class="nav-item"><a  href="/projects/">projects</a></li>
+                    <li class="nav-item"><a aria-current="page" href="/posts/">blog</a></li>
+                    <li class="nav-item"><a  href="/about/">about</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            
+        <article class="post">
+            
+                
+                    <h1>Scraping two-column PDFs in R</h1>
+                
+            
+
+            <h2>What I was trying to do</h2>
+<p>Scrape text from PDFs where the text was laid out in two columns.</p>
+<h2>What I tried first: pdftools and readr</h2>
+<p>Many text scraping tutorials in R recommend using <code class="language-r">pdftools</code> to extract text from a PDF file. So far, so straightforward.</p>
+<pre class="language-r"><code class="language-r">library<span class="token punctuation">(</span>pdftools<span class="token punctuation">)</span><br>library<span class="token punctuation">(</span>tidyverse<span class="token punctuation">)</span><br><br>text <span class="token operator">&lt;-</span> pdf_text<span class="token punctuation">(</span><span class="token string">"my_file.pdf"</span><span class="token punctuation">)</span></code></pre>
+<p>That results in a character vector, but it still needs cleaning -- each element in the vector is a chunk of text, and there's loads of whitespace throughout. One way to clean things up is to <code class="language-r">readr::read_lines()</code> to expand out the vector so that each line in the file is its own element, and then use <code class="language-r">stringr::str_squish()</code> to trim whitespace.</p>
+<pre class="language-r"><code class="language-r">lines <span class="token operator">&lt;-</span> readr<span class="token operator">::</span>read_lines<span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token percent-operator operator">%>%</span><br>    stringr<span class="token operator">::</span>str_squish<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>However, when looking at the results, it became clear that the text had been garbled. Rather than reading text in line-by-line within one column before moving to the next, <code class="language-r">pdftools::pdf_text()`</code> read text in line-by-line across both columns.</p>
+<h2>What I ended up using: tabulizer</h2>
+<p>I ended up switching from <code class="language-r">pdftools</code> to <code class="language-r"><a href="https://cran.r-project.org/web/packages/tabulizer/index.html">tabulizer</a></code>, which uses the Tabula Java library to extract tables and text from PDFs. Its <code class="language-r">extract_text()</code> function correctly read the text going down one column first, then the other, and even returned the result as a single element in a character vector.</p>
+<pre class="language-r"><code class="language-r">lines <span class="token operator">&lt;-</span> tabulizer<span class="token operator">::</span>extract_text<span class="token punctuation">(</span><span class="token string">"my_file.pdf"</span><span class="token punctuation">)</span> <span class="token percent-operator operator">%>%</span> <br>    stringr<span class="token operator">::</span>str_split<span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span></code></pre>
+<p>A word about the second part of this code snippet. As it turned out, the output of <code class="language-r">extract_text()</code> was too long to bind to a data frame record as I needed to do next. The text was getting truncated. To address that problem, I split the scraped text along carriage returns with <code class="language-r">stringr::str_split()</code>, resulting in a list of lines. This list could then be bound in its entirety to the data frame and written to an RDS file.</p>
+
+        </article>
+    
+        </main>
+
+        <footer>
+            <!-- <span class="credit">amfz</span> -->
+            <!-- <a href="#site">^top</a> -->
+        </footer>
+    </div>
+</body>
+</html>
