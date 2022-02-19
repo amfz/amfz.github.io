@@ -1,7 +1,7 @@
 ---
 title: about
 current: about
-layout: postlayout.njk
+layout: postLayout.njk
 ---
 
 ## a mahfouz
