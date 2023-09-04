@@ -4,4 +4,4 @@ current: "/"
 layout: postLayout.njk
 ---
 
-i'm A, and this site is under (re-)construction.
+I'm A, and this is where I post work-related things when it occurs to me

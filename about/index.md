@@ -14,7 +14,7 @@ layout: postLayout.njk
 
 💻 [my github](https://github.com/amfz)
 
-📧 first initial [dot] last name [at] mail.utoronto.ca
+📧 amhfz [at] proton [dot] me
 
 ## amfz.github.io
 
